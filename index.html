@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QPickr.com — Random Interview Question Picker</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="QPickr — paste interview questions, upload a list, and pick random questions for quick prep.">
+</head>
+<body>
+  <main class="hero">
+    <!-- Animated background blobs (SVG) -->
+    <svg class="bg-blobs" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="gradA" x1="0" x2="1"><stop offset="0" stop-color="#7c3aed" stop-opacity="0.18"/><stop offset="1" stop-color="#4c1d95" stop-opacity="0.12"/></linearGradient>
+        <linearGradient id="gradB" x1="0" x2="1"><stop offset="0" stop-color="#06b6d4" stop-opacity="0.12"/><stop offset="1" stop-color="#0ea5a4" stop-opacity="0.08"/></linearGradient>
+      </defs>
+      <g class="blob blob-a" transform="translate(80,80)">
+        <path d="M120 20 C160 0 240 -10 280 40 C320 90 260 160 200 200 C140 240 60 200 20 150 C-20 100 80 40 120 20 Z" fill="url(#gradA)" />
+      </g>
+      <g class="blob blob-b" transform="translate(520,380)">
+        <path d="M120 40 C160 0 260 -10 300 40 C340 90 290 170 230 210 C170 250 90 210 40 160 C-10 110 80 60 120 40 Z" fill="url(#gradB)" />
+      </g>
+    </svg>
+
+    <div class="container">
+      <header class="site-header">
+        <div class="brand">
+          <!-- SVG logo -->
+          <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#7c3aed"/>
+                <stop offset="1" stop-color="#4c1d95"/>
+              </linearGradient>
+            </defs>
+            <rect rx="10" width="48" height="48" fill="url(#g1)"></rect>
+            <text x="50%" y="58%" text-anchor="middle" font-family="Space Grotesk, Inter, system-ui" font-size="20" fill="#fff" font-weight="700">Q</text>
+          </svg>
+
+          <div class="brand-text">
+            <div class="title">QPickr</div>
+            <div class="subtitle">Random Interview Question Picker</div>
+          </div>
+        </div>
+
+        <nav class="nav-actions">
+          <a class="ghost" href="#" onclick="alert('You are running locally — upload your files or paste questions.')">QPickr.com</a>
+        </nav>
+      </header>
+
+      <section class="hero-grid">
+        <aside class="left">
+          <h1 class="headline">Practice faster. Pick random interview questions in one click.</h1>
+          <p class="lead">Paste questions (one per line) or upload a `.txt` file. Use <strong>Don't repeat</strong> to exhaust the list before repeating.</p>
+
+          <div class="card card-input">
+            <label class="label" for="questionsInput">Your questions (one per line)</label>
+            <textarea id="questionsInput" placeholder="What is Agile?&#10;Explain As-Is and To-Be..."></textarea>
+
+            <div class="tools-row">
+              <label class="file-label" for="fileInput">Upload .txt</label>
+              <input id="fileInput" type="file" accept="text/plain" />
+
+              <button id="loadSample" class="btn ghost">Load Sample</button>
+              <button id="clear" class="btn ghost">Clear</button>
+            </div>
+
+            <div class="btn-row">
+              <button id="pickBtn" class="btn primary">Pick Random</button>
+              <button id="copyBtn" class="btn">Copy Result</button>
+              <button id="saveBtn" class="btn">Save as .txt</button>
+              <button id="saveLocal" class="btn ghost">Save to Browser</button>
+            </div>
+
+            <div class="option-row">
+              <input type="checkbox" id="noRepeat" />
+              <label for="noRepeat" class="opt-label">Don't repeat questions until exhausted</label>
+            </div>
+          </div>
+        </aside>
+
+        <aside class="right">
+          <div class="card result-card">
+            <div class="result-head">
+              <div class="small">Picked question</div>
+              <div class="remaining">Remaining: <span id="remainingCount">—</span></div>
+            </div>
+
+            <div id="resultBubble" class="result-bubble">
+              <div id="resultText" class="result-text">Click <strong>Pick Random</strong> to start</div>
+            </div>
+
+            <div class="notes">
+              <div class="note">Tip: Press <kbd>Ctrl/⌘ + Enter</kbd> to pick quickly while typing.</div>
+              <div class="note muted">Made by QPickr.com — quick interview practice.</div>
+            </div>
+          </div>
+
+          <div class="card stats">
+            <!-- animated SVG illustration (moving parts) -->
+            <svg class="illu" viewBox="0 0 120 120" width="100%" height="120" aria-hidden="true">
+              <g transform="translate(10,10)">
+                <rect x="0" y="0" width="100" height="100" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" />
+                <g class="illu-checks" transform="translate(12,14)">
+                  <rect x="0" y="0" width="76" height="10" rx="3" fill="#7c3aed" class="pulse1" />
+                  <rect x="0" y="18" width="62" height="10" rx="3" fill="#06b6d4" class="pulse2" />
+                  <rect x="0" y="36" width="48" height="10" rx="3" fill="#4c1d95" class="pulse3" />
+                </g>
+              </g>
+            </svg>
+
+            <div style="margin-top:12px;color:var(--muted);font-size:13px">Pro tip: Use the <strong>Load Sample</strong> button to paste common BA questions quickly.</div>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="site-footer">
+        <div>© <strong>QPickr</strong> • Built for fast interview prep</div>
+      </footer>
+    </div>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
